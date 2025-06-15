@@ -1,0 +1,49 @@
+local executor = Instance.new("ScreenGui", game.StarterGui)
+executor.Name = "Executor"
+local frame = Instance.new("Frame", executor)
+frame.Size = UDim2.new(0, 316, 0, 174)
+frame.Position = UDim2.new(0.037, 0, 0.217, 0)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+local ExecutorEvent = Instance.new("RemoteEvent", frame)
+ExecutorEvent.Name = "ExecutorEvent"
+local textLabel = Instance.new("TextLabel", frame)
+textLabel.Size = UDim2.new(0, 316, 0, 42)
+textLabel.Position = UDim2.new(0, 0, -0.241, 0)
+textLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+textLabel.Text = "Matt's Message Sender (SS)"
+textLabel.TextScaled = true
+textLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+textLabel.Font = Enum.Font.FredokaOne
+local send = Instance.new("TextButton", frame)
+send.Name = "Send"
+send.Size = UDim2.new(0, 148, 0, 35)
+send.Position = UDim2.new(0.032, 0, 0.759, 0)
+send.Text = "Send"
+send.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+send.TextColor3 = Color3.fromRGB(255, 255, 255)
+send.TextScaled = true
+send.Font = Enum.Font.FredokaOne
+local clear = Instance.new("TextButton", frame)
+clear.Name = "Clear"
+clear.Size = UDim2.new(0, 148, 0, 35)
+clear.Position = UDim2.new(0.5, 0, 0.759, 0)
+clear.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+clear.Text = "Clear"
+clear.TextColor3 = Color3.fromRGB(255, 255, 255)
+clear.TextScaled = true
+clear.Font = Enum.Font.FredokaOne
+local scriptbox = Instance.new("TextBox", frame)
+scriptbox.Position = UDim2.new(0.032, 0, 0.075, 0)
+scriptbox.Name = "ScriptBox"
+scriptbox.Size = UDim2.new(0, 316, 0, 174)
+scriptbox.Text = ""
+scriptbox.PlaceholderText = "Enter Code here"
+scriptbox.TextScaled = true
+-- TIME FOR SCRIPTS!!
+local injectionScript = Instance.new("LocalScript", frame)
+injectionScript.Name = "InjectionScript" -- This is supposed to inject aka load the main script and it is for the guis most part
+local executorScript = Instance.new("Script", frame) -- Notice how its not a "local-", just a script
+executorScript.name = "ExecutorScript"
+-- TIME TO LOAD IN THE STUFF FOR SCRIPTS
+injectionScript.Source = "local le = script.Parent.LoaderEvent local ee = script.Parent.ExecutorEvent local scriptBox = script.Parent.ScriptBox local scriptE = script.Parent.ExecutorScript local clear = script.Parent.Clear local Send = script.Parent.Send clear.MouseButton1Click:Connect(function() scriptBox.Text = "" end) scriptBox.Changed:Connect(function() scriptBox.Text = scriptBox.Text end) Send.MouseButton1Click:Connect(function() ee:FireServer(scriptBox.Text) end)"
+executorScript.Source = "local ee = script.Parent.ExecutorEvent ee.OnServerEvent:Connect(function(plr, input) print(input) end)"
